@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const app = express();
 const routes = require("./routes");
 
+
+app.use('/files', express.static('files'))
+
 app.use("/", routes);
 
 app.use(bodyParser.json());
