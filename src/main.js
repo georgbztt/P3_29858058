@@ -41,7 +41,7 @@ app.get('/dashboard', (req, res) => {
 
 
 app.use("/", public);
-app.use("/", routes);
+app.use("/admin", routes);
 
 
 // Configura EJS como motor de plantillas

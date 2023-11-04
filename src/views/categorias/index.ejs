@@ -1,5 +1,5 @@
 <%- include('../partials/start.ejs') %>
-<a href="/categorias/create" class="button is-link">Nueva Categoria</a>
+<a href="/admin/categorias/create" class="button is-link">Nueva Categoria</a>
 
 <table class="table is-fullwidth mt-2">
   <thead>
@@ -18,14 +18,14 @@
       <td>
         <div class="field has-addons">
           <p class="control">
-            <a href="/categorias/<%=categoria.id%>" class="button">
+            <a href="/admin/categorias/<%=categoria.id%>" class="button">
               <span class="icon is-small">
                 <i class="fas fa-edit"></i>
               </span>
             </a>
           </p>
           <p class="control">
-            <a href="/categorias/delete/<%=categoria.id%>" class="button">
+            <a href="/admin/categorias/delete/<%=categoria.id%>" class="button">
               <span class="icon is-small">
                 <i class="fas fa-trash"></i>
               </span>

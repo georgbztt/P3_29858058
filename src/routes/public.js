@@ -1,9 +1,12 @@
 const express = require('express');
+const producto = require('../model/producto');
 const router = express.Router();
 
 
-router.get('/', (req, res) => {
-    res.render("public/index");
+router.get('/', async (req, res) => {
+    const productos = await producto.all();
+    console.log(productos);
+    res.render("public/index", { productos });
 });
 
 router.get('/producto/1', (req, res) => {
