@@ -15,9 +15,14 @@ router.get('/productos/create', (req, res) => {
 });
 
 router.post('/productos', (req, res) => {
-    // console.log(req.body)
-    // res.send('qlq')
      producto.store(req,res);
+});
+router.get('/productos/:producto_id', (req, res) => {
+     producto.show(req,res);
+});
+
+router.post('/productos/:producto_id', (req, res) => {
+     producto.update(req,res);
 });
 
 

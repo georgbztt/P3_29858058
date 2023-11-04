@@ -42,9 +42,11 @@ module.exports = {
         })
     },
     findOne(id) {
+        console.log(id)
         return new Promise((suc, rej) => {
-            db.all(`SELECT * from productos where id = ${id}`, function (err, rows) {
+            db.all(`SELECT t1.id, t1.nombre, t1.descripcion, t1.codigo, t1.precio, t1.marca, t1.stock, t1.categoria_id ,t2.nombre as categoria FROM productos as t1 LEFT JOIN categorias as t2 ON t1.categoria_id = t2.id where t1.id = ${id}`, function (err, rows) {
                 if (err) {
+                    console.log(err)
                     rej(err.message)
                 } else {
                     suc(rows[0])
@@ -64,13 +66,14 @@ module.exports = {
         })
     },
     update(data, producto_id) {
-        const { nombre, descripcion, codigo, precio, marca, stock, catergoria_id } = data;
+        const { nombre, descripcion, codigo, precio, marca, stock, categoria_id } = data;
         return new Promise((suc, rej) => {
             db.serialize(function () {
                 try {
-                    const stmt = db.prepare(`UPDATE productos set nombre = ?, descripcion = ?, codigo = ?, precio = ?, marca = ?, stock = ?, catergoria_id = ?  where id = ?`);
-                    stmt.run(nombre, descripcion, codigo, precio, marca, stock, catergoria_id, producto_id);
+                    const stmt = db.prepare(`UPDATE productos set nombre = ?, descripcion = ?, codigo = ?, precio = ?, marca = ?, stock = ?, categoria_id = ?  where id = ?`);
+                    stmt.run(nombre, descripcion, codigo, precio, marca, stock, categoria_id, producto_id);
                     stmt.finalize();
+                    data.id = producto_id;
                     suc(data);
                 } catch (error) {
                     rej(error)
