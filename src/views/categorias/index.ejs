@@ -1,0 +1,42 @@
+<%- include('../partials/start.ejs') %>
+<a href="/categorias/create" class="button is-link">Nueva Categoria</a>
+
+<table class="table is-fullwidth mt-2">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% categorias.forEach(function(categoria) { %>
+
+    <tr>
+      <td><%=categoria.nombre%></td>
+
+      <td>
+        <div class="field has-addons">
+          <p class="control">
+            <a href="/categorias/<%=categoria.id%>" class="button">
+              <span class="icon is-small">
+                <i class="fas fa-edit"></i>
+              </span>
+            </a>
+          </p>
+          <p class="control">
+            <a href="/categorias/delete/<%=categoria.id%>" class="button">
+              <span class="icon is-small">
+                <i class="fas fa-trash"></i>
+              </span>
+            </a>
+          </p>
+        </div>
+      </td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
+
+
+<%- include('../partials/end.ejs') %>

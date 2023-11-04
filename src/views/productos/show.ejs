@@ -1,174 +1,171 @@
 <%- include('../partials/start.ejs') %>
 
-    <form action="/productos/<%=_producto.id%>" method="post">
+<form action="/productos/<%=_producto.id%>" method="post">
 
 
 
-        <div class="field">
-            <label class="label">Nombre</label>
-            <div class="control">
-                <input class="input" name="nombre" type="text" placeholder="" value="<%=_producto.nombre%>">
-            </div>
+  <div class="field">
+    <label class="label">Nombre</label>
+    <div class="control">
+      <input class="input" name="nombre" type="text" placeholder="" value="<%=_producto.nombre%>">
+    </div>
+  </div>
+
+
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <label class="label">Codigo</label>
+        <div class="control">
+          <input class="input" name="codigo" type="text" placeholder="" value="<%=_producto.codigo%>">
         </div>
+      </div>
 
-
-        <div class="field is-horizontal">
-            <div class="field-body">
-                <div class="field">
-                    <label class="label">Codigo</label>
-                    <div class="control">
-                        <input class="input" name="codigo" type="text" placeholder="" value="<%=_producto.codigo%>">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Marca</label>
-                    <div class="control">
-                        <input class="input" name="marca" type="text" placeholder="" value="<%=_producto.marca%>">
-                    </div>
-                </div>
-
-            </div>
+      <div class="field">
+        <label class="label">Marca</label>
+        <div class="control">
+          <input class="input" name="marca" type="text" placeholder="" value="<%=_producto.marca%>">
         </div>
+      </div>
 
-        <div class="field">
-            <label class="label">Categoria</label>
-            <div class="control">
-                <div class="select is-fullwidth">
-                    <select name="categoria_id">
+    </div>
+  </div>
 
-                        <option value="<%=_producto.categoria_id%>" selected>
-                            <%=_producto.categoria%>
-                        </option>
+  <div class="field">
+    <label class="label">Categoria</label>
+    <div class="control">
+      <div class="select is-fullwidth">
+        <select name="categoria_id">
 
-                        <% _categorias.forEach(function(categoria) { %>
-                            <option value="<%=categoria.id%>">
-                                <%=categoria.nombre%>
-                            </option>
-                            <% }); %>
+          <option value="<%=_producto.categoria_id%>" selected>
+            <%=_producto.categoria%>
+          </option>
 
-                    </select>
-                </div>
-            </div>
+          <% _categorias.forEach(function(categoria) { %>
+          <option value="<%=categoria.id%>">
+            <%=categoria.nombre%>
+          </option>
+          <% }); %>
+
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <label class="label">Precio</label>
+        <div class="control">
+          <input class="input" name="precio" type="text" placeholder="" value="<%=_producto.precio%>">
         </div>
+      </div>
 
-        <div class="field is-horizontal">
-            <div class="field-body">
-                <div class="field">
-                    <label class="label">Precio</label>
-                    <div class="control">
-                        <input class="input" name="precio" type="text" placeholder="" value="<%=_producto.precio%>">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Stock</label>
-                    <div class="control">
-                        <input class="input" name="stock" type="text" placeholder="" value="<%=_producto.stock%>">
-                    </div>
-                </div>
-            </div>
+      <div class="field">
+        <label class="label">Stock</label>
+        <div class="control">
+          <input class="input" name="stock" type="text" placeholder="" value="<%=_producto.stock%>">
         </div>
+      </div>
+    </div>
+  </div>
 
 
-        <div class="field">
-            <label class="label">Descripción</label>
-            <div class="control">
-                <textarea class="textarea" name="descripcion" placeholder="Textarea">
-<%=_producto.descripcion%>
-    </textarea>
-            </div>
-        </div>
+  <div class="field">
+    <label class="label">Descripción</label>
+    <div class="control">
+      <textarea class="textarea" name="descripcion" placeholder="Textarea"><%=_producto.descripcion%></textarea>
+    </div>
+  </div>
 
-        <button class="button is-link is-fullwidth mb-4" id="agregarCampoImagen">Agregar Imagen</button>
+  <button class="button is-link is-fullwidth mb-4" id="agregarCampoImagen">Agregar Imagen</button>
 
-        <div id="imagenContainer">
-            <% _imagenes.forEach(function(imagen) { %>
+  <div id="imagenContainer">
+    <% _imagenes.forEach(function(imagen) { %>
 
-                <div class="field has-addons has-addons-right">
-                    <p class="control is-expanded">
-                        <input class="input" name="imagen[]" type="text" placeholder="imagen url"
-                            value="<%=imagen.url%>">
-                    </p>
-                    <p class="control">
-                        <button class="button is-danger eliminar-imagen">
-                            Eliminar
-                        </button>
-                    </p>
-                </div>
+    <div class="field has-addons has-addons-right">
+      <p class="control is-expanded">
+        <input class="input" name="imagen[]" type="text" placeholder="imagen url" value="<%=imagen.url%>">
+      </p>
+      <p class="control">
+        <button class="button is-danger eliminar-imagen">
+          Eliminar
+        </button>
+      </p>
+    </div>
 
-                <% }); %>
+    <% }); %>
 
-        </div>
+  </div>
 
 
-        <div class="field is-grouped mt-5">
-            <div class="control">
-                <button class="button is-link">Guardar</button>
-            </div>
-            <div class="control">
-                <button class="button is-link is-light">Cancelar</button>
-            </div>
-        </div>
+  <div class="field is-grouped mt-5">
+    <div class="control">
+      <button class="button is-link">Guardar</button>
+    </div>
+    <div class="control">
+      <button class="button is-link is-light">Cancelar</button>
+    </div>
+  </div>
 
-    </form>
-    <script>
-        function crearCampoDeImagen() {
-            const divElement = document.createElement('div');
-            divElement.className = 'field has-addons has-addons-right';
+</form>
+<script>
+  function crearCampoDeImagen() {
+    const divElement = document.createElement('div');
+    divElement.className = 'field has-addons has-addons-right';
 
-            const controlExpanded = document.createElement('p');
-            controlExpanded.className = 'control is-expanded';
+    const controlExpanded = document.createElement('p');
+    controlExpanded.className = 'control is-expanded';
 
-            const inputElement = document.createElement('input');
-            inputElement.className = 'input';
-            inputElement.name = 'imagen[]';
-            inputElement.type = 'text';
-            inputElement.placeholder = 'imagen url';
+    const inputElement = document.createElement('input');
+    inputElement.className = 'input';
+    inputElement.name = 'imagen[]';
+    inputElement.type = 'text';
+    inputElement.placeholder = 'imagen url';
 
-            controlExpanded.appendChild(inputElement);
+    controlExpanded.appendChild(inputElement);
 
-            const control = document.createElement('p');
-            control.className = 'control';
+    const control = document.createElement('p');
+    control.className = 'control';
 
-            const buttonElement = document.createElement('button');
-            buttonElement.className = 'button is-danger';
-            buttonElement.textContent = 'Eliminar';
-            buttonElement.onclick = function () {
-                eliminarCampoDeImagen(divElement);
-            };
+    const buttonElement = document.createElement('button');
+    buttonElement.className = 'button is-danger';
+    buttonElement.textContent = 'Eliminar';
+    buttonElement.onclick = function() {
+      eliminarCampoDeImagen(divElement);
+    };
 
-            control.appendChild(buttonElement);
+    control.appendChild(buttonElement);
 
-            divElement.appendChild(controlExpanded);
-            divElement.appendChild(control);
+    divElement.appendChild(controlExpanded);
+    divElement.appendChild(control);
 
-            return divElement;
-        }
+    return divElement;
+  }
 
-        function eliminarCampoDeImagen(element) {
-            const container = document.getElementById('imagenContainer');
-            container.removeChild(element);
-        }
+  function eliminarCampoDeImagen(element) {
+    const container = document.getElementById('imagenContainer');
+    container.removeChild(element);
+  }
 
-        // Agregar el nuevo campo de imagen al documento cuando sea necesario
-        const addButton = document.getElementById('agregarCampoImagen');
-        const imagenContainer = document.getElementById('imagenContainer');
+  // Agregar el nuevo campo de imagen al documento cuando sea necesario
+  const addButton = document.getElementById('agregarCampoImagen');
+  const imagenContainer = document.getElementById('imagenContainer');
 
-        addButton.addEventListener('click', function (e) {
-            e.preventDefault()
-            const nuevoCampoImagen = crearCampoDeImagen();
-            imagenContainer.appendChild(nuevoCampoImagen);
-        });
+  addButton.addEventListener('click', function(e) {
+    e.preventDefault()
+    const nuevoCampoImagen = crearCampoDeImagen();
+    imagenContainer.appendChild(nuevoCampoImagen);
+  });
 
-        const eliminarBotones = document.querySelectorAll('.eliminar-imagen');
+  const eliminarBotones = document.querySelectorAll('.eliminar-imagen');
 
-        eliminarBotones.forEach(function (boton) {
-            boton.addEventListener('click', function () {
-                // Accede al elemento padre del botón y elimínalo
-                const elementoPadre = boton.parentElement.parentElement;
-                elementoPadre.remove();
-            });
-        });
-    </script>
-    <%- include('../partials/end.ejs') %>
+  eliminarBotones.forEach(function(boton) {
+    boton.addEventListener('click', function() {
+      // Accede al elemento padre del botón y elimínalo
+      const elementoPadre = boton.parentElement.parentElement;
+      elementoPadre.remove();
+    });
+  });
+</script>
+<%- include('../partials/end.ejs') %>

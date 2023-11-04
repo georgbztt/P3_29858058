@@ -1,0 +1,24 @@
+<%- include('../partials/start.ejs') %>
+
+    <form action="/categorias/<%=_categoria.id%>" method="post">
+
+
+
+        <div class="field">
+            <label class="label">Nombre</label>
+            <div class="control">
+                <input class="input" name="nombre" type="text" placeholder="" value="<%=_categoria.nombre%>">
+            </div>
+        </div>
+
+
+
+        <div class="field is-grouped mt-5">
+            <div class="control">
+                <button class="button is-link">Guardar</button>
+            </div>
+        </div>
+
+    </form>
+
+    <%- include('../partials/end.ejs') %>

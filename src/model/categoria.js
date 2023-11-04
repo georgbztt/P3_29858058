@@ -57,7 +57,7 @@ module.exports = {
             db.serialize(function () {
                 try {
                     const stmt = db.prepare(`UPDATE categorias set nombre = ? where id = ?`);
-                    stmt.run(nombre);
+                    stmt.run(nombre,categoria_id);
                     stmt.finalize();
                     suc(data);
                 } catch (error) {
