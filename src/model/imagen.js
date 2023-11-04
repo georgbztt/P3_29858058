@@ -81,5 +81,20 @@ module.exports = {
                 }
             });
         })
+    },
+    destacar(old, producto_id) {
+        const _new = !old;
+        return new Promise((suc, rej) => {
+            db.serialize(function () {
+                try {
+                    const stmt = db.prepare(`UPDATE imagenes set destacado = ? where id = ?`);
+                    stmt.run(_new, producto_id);
+                    stmt.finalize();
+                    suc(data);
+                } catch (error) {
+                    rej(error)
+                }
+            });
+        })
     }
 }

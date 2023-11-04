@@ -41,4 +41,6 @@ router.get('/categorias/delete/:categoria_id', (req, res) => {
 });
 
 
+
+
 module.exports = router; // You export the intance

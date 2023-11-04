@@ -28,6 +28,7 @@ db.serialize(function () {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             url TEXT,
             producto_id INTEGER,
+            destacado INTEGER,
             FOREIGN KEY(producto_id) REFERENCES producto(id)
     )`);
 });
