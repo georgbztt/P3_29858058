@@ -7,29 +7,35 @@
       <th>Nombre</th>
       <th>Descripción</th>
       <th>Codigo</th>
-      <th>Precio</th>
+      <th>Marca</th>
       <th>Categoria</th>
+      <th>Precio</th>
+      <th>Stock</th>
       <th>Opciones</th>
     </tr>
   </thead>
   <tbody>
+    <% productos.forEach(function(producto) { %>
+
     <tr>
-      <td>Nombre</td>
-      <td>Descripción</td>
-      <td>Codigo</td>
-      <td>Precio</td>
-      <td>Categoria</td>
+      <td><%=producto.nombre%></td>
+      <td><%=producto.descripcion %></td>
+      <td><%=producto.codigo %></td>
+      <td><%=producto.marca %></td>
+      <td><%=producto.categoria %></td>
+      <td>$ <%=producto.precio.toFixed(2) %></td>
+      <td><%=producto.stock.toFixed(2) %></td>
       <td>
         <div class="field has-addons">
           <p class="control">
-            <button class="button">
+            <a href="/producto/<%=producto.id%>" class="button">
               <span class="icon is-small">
                 <i class="fas fa-edit"></i>
               </span>
-            </button>
+            </a>
           </p>
           <p class="control">
-            <button class="button">
+            <button class="button" onclick="remove(event,<%=producto.id%>)">
               <span class="icon is-small">
                 <i class="fas fa-trash"></i>
               </span>
@@ -38,7 +44,7 @@
         </div>
       </td>
     </tr>
-
+    <% }); %>
   </tbody>
 </table>
 

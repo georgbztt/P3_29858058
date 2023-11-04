@@ -2,7 +2,7 @@ const db = require('../database/conection');
 module.exports = {
     all() {
         return new Promise((suc, rej) => {
-            db.all('SELECT * FROM productos LEFT JOIN categorias ON productos.categoria_id = categorias.id ORDER BY productos.id DESC', function (err, rows) {
+            db.all('SELECT t1.id, t1.nombre, t1.descripcion, t1.codigo, t1.precio, t1.marca, t1.stock, t1.categoria_id ,t2.nombre as categoria FROM productos as t1 LEFT JOIN categorias as t2 ON t1.categoria_id = t2.id ORDER BY t1.id DESC', function (err, rows) {
                 if (err) {
                     rej(err.message)
                 } else {
