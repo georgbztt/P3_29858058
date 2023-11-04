@@ -26,7 +26,6 @@ router.get('/productos/delete/:producto_id', (req, res) => {
 });
 
 
-
 router.get('/categorias', (req, res) => {
     categoria.index(req,res);
 });
@@ -41,4 +40,4 @@ router.get('/categorias/delete/:categoria_id', (req, res) => {
 });
 
 
-module.exports = router; // You export the intance
+module.exports = router;
