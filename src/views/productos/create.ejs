@@ -36,8 +36,11 @@
             <div class="control">
                 <div class="select is-fullwidth">
                     <select name="categoria_id">
-                        <option>asds</option>
-                        <option>With options</option>
+                        <% _categorias.forEach(function(categoria) { %>
+                            <option value="<%=categoria.id%>">
+                              <%=categoria.nombre%>
+                            </option>
+                            <% }); %>
                     </select>
                 </div>
             </div>
@@ -88,9 +91,6 @@
         <div class="field is-grouped mt-5">
             <div class="control">
                 <button class="button is-link">Guardar</button>
-            </div>
-            <div class="control">
-                <button class="button is-link is-light">Cancelar</button>
             </div>
         </div>
 

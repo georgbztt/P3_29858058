@@ -31,7 +31,7 @@ module.exports = {
         return new Promise((suc, rej) => {
             db.serialize(function () {
                 try {
-                    const stmt = db.prepare(`DELETE from produtos where id = ?`);
+                    const stmt = db.prepare(`DELETE from productos where id = ?`);
                     stmt.run(producto_id);
                     stmt.finalize();
                     suc(true);

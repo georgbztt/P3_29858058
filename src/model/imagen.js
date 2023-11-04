@@ -6,7 +6,7 @@ module.exports = {
             db.serialize(function () {
                 try {
                     const stmt = db.prepare("INSERT INTO imagenes (url, producto_id) VALUES (?,?)");
-                    imagenes.forEach(imagen => {
+                    imagenes?.forEach(imagen => {
                         stmt.run(imagen, producto_id);
                     });
                     stmt.finalize();
