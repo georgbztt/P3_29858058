@@ -1,4 +1,5 @@
 const express = require('express');
+const producto = require('./controller/producto');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -6,7 +7,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/productos', (req, res) => {
-    res.render("productos/index");
+    producto.index(req,res);
 });
 
 
