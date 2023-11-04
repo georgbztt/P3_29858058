@@ -12,12 +12,13 @@ module.exports = {
         })
     },
     create(data) {
-        const { nombre, descripcion, codigo, precio, marca, stock, catergoria_id } = data;
+        console.log(data)
+        const { nombre, descripcion, codigo, precio, marca, stock, categoria_id } = data;
         return new Promise((suc, rej) => {
             db.serialize(function () {
                 try {
-                    const stmt = db.prepare("INSERT INTO productos (nombre, descripcion, codigo, precio, marca, stock, catergoria_id) VALUES (?,?,?,?,?,?,?)");
-                    stmt.run(nombre, descripcion, codigo, precio, marca, stock, catergoria_id);
+                    const stmt = db.prepare("INSERT INTO productos (nombre, descripcion, codigo, precio, marca, stock, categoria_id) VALUES (?,?,?,?,?,?,?)");
+                    stmt.run(nombre, descripcion, codigo, precio, marca, stock, categoria_id);
                     stmt.finalize();
                     suc(data);
                 } catch (error) {
@@ -43,6 +44,17 @@ module.exports = {
     findOne(id) {
         return new Promise((suc, rej) => {
             db.all(`SELECT * from productos where id = ${id}`, function (err, rows) {
+                if (err) {
+                    rej(err.message)
+                } else {
+                    suc(rows[0])
+                }
+            });
+        })
+    },
+    last() {
+        return new Promise((suc, rej) => {
+            db.all(`SELECT * from productos order by id DESC limit 1`, function (err, rows) {
                 if (err) {
                     rej(err.message)
                 } else {

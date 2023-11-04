@@ -26,6 +26,7 @@ db.serialize(function () {
 db.serialize(function () {
     db.run(`CREATE TABLE IF NOT EXISTS imagenes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            url TEXT,
             producto_id INTEGER,
             FOREIGN KEY(producto_id) REFERENCES producto(id)
     )`);

@@ -1,3 +1,4 @@
+const imagen = require("../model/imagen");
 const producto = require("../model/producto");
 
 module.exports = {
@@ -7,5 +8,11 @@ module.exports = {
     },
     async create(req, res) {
         res.render("productos/create");
+    },
+    async store(req, res) {
+        await producto.create(req.body);
+        const _producto = await producto.last();
+        await imagen.createMany(req.body, _producto.id);
+        res.redirect('/productos');
     }
 }

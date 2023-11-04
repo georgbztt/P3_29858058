@@ -6,15 +6,11 @@ const routes = require("./routes");
 
 app.use('/files', express.static('files'))
 
-app.use("/", routes);
-
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(
-    express.urlencoded({
-        extended: true,
-    })
-);
+app.use("/", routes);
+
 
 
 // Configura EJS como motor de plantillas
