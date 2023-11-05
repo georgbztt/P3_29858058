@@ -47,37 +47,36 @@
     <section>
       <div class="container is-relative">
         <div class="columns is-mobile is-vcenstered is-multiline">
+
+          <% productos.forEach(function(producto) { %>
+
           <div class="column is-6-mobile is-3-desktop is-4-tablet mb-12 mb-0-desktop">
             <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                </figure>
+              <div class="card-image" style="text-align: center;">
+                <img src="<%= producto.imagen_destacada%>" style="max-width: 150px; height: auto; display: inline-block;" alt="<%= producto.imagen_destacada%>">
               </div>
               <header class="card-header">
                 <p class="card-header-title">
-                  Card header
+                  <%= producto.nombre%>
                 </p>
               </header>
               <div class="card-content">
                 <div class="content">
-                    
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Phasellus nec iaculis mauris.
-                
-                  <br>
                   <p class="has-text-weight-bold">
-                      Marca
+                    <%= producto.marca%>
+                  </p>
+                  <p class="">
+                    <%= producto.nombre_categoria%>
                   </p>
                 </div>
               </div>
               <footer class="card-footer">
-                <a href="#" class="card-footer-item">Ver</a>
-                <a class="card-footer-item has-text-weight-bold">$ 100.00</a>
+                <a href="/producto/<%=producto.id%>" class="card-footer-item">Ver</a>
+                <a class="card-footer-item has-text-weight-bold">$ <%= producto?.precio.toFixed(2)%></a>
               </footer>
             </div>
           </div>
-
+          <% }); %>
 
         </div>
       </div>

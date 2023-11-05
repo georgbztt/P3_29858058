@@ -1,16 +1,17 @@
 const express = require('express');
 const producto = require('../model/producto');
+const productoController = require('../controller/producto');
 const router = express.Router();
 
 
 router.get('/', async (req, res) => {
-    const productos = await producto.all();
-    console.log(productos);
+    const productos = await producto.allWithImagen();
+    console.log(productos)
     res.render("public/index", { productos });
 });
 
-router.get('/producto/1', (req, res) => {
-    res.render("public/producto");
+router.get('/producto/:producto_id', (req, res) => {
+    productoController.preview(req,res)
 });
 
 

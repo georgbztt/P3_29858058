@@ -32,7 +32,7 @@ module.exports = {
         await categoria.create(req.body);
         const _categoria = await categoria.last();
         await imagen.createMany(req.body, _categoria.id);
-        res.redirect('/categorias');
+        res.redirect('/admin/categorias');
     },
     async show(req, res) {
         const { categoria_id } = req.params
@@ -52,12 +52,12 @@ module.exports = {
         const { categoria_id } = req.params;
         await categoria.update(req.body, categoria_id);
 
-        res.redirect('/categorias');
+        res.redirect('/admin/categorias');
     },
     async delete(req, res) {
         const { categoria_id } = req.params
         await categoria.delete(categoria_id);
-        res.redirect('/categorias');
+        res.redirect('/admin/categorias');
         // res.render("categorias/show", { _categoria, _imagenes, _categorias });
     },
 }

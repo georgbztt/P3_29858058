@@ -1,6 +1,7 @@
 const imagen = require("../model/imagen");
 const producto = require("../model/producto");
 const categoria = require("../model/categoria");
+require('dotenv').config();
 
 module.exports = {
     validarDatos(data) {
@@ -59,7 +60,7 @@ module.exports = {
         await producto.create(req.body);
         const _producto = await producto.last();
         await imagen.createMany(req.body, _producto.id);
-        res.redirect('/productos');
+        res.redirect('/admin/productos');
     },
     async show(req, res) {
         const { producto_id } = req.params
@@ -80,12 +81,20 @@ module.exports = {
         const _producto = await producto.update(req.body, producto_id);
         await imagen.deleteMany(_producto.id);
         await imagen.createMany(req.body, _producto.id);
-        res.redirect('/productos');
+        res.redirect('/admin/productos');
     },
     async delete(req, res) {
         const { producto_id } = req.params
         await producto.delete(producto_id);
-        res.redirect('/productos');
+        res.redirect('/admin/productos');
         // res.render("productos/show", { _producto, _imagenes, _categorias });
     },
+    async preview(req,res){
+        const { producto_id } = req.params;
+        const phone = process.env.PHONE;
+        const _producto = await producto.oneWithImagen(producto_id);
+        const _imagenes = await imagen.findAll(producto_id);
+        res.render("public/producto", { _producto,_imagenes,phone });
+        // res.render("");
+    }
 }
