@@ -1,14 +1,18 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const routes = require("./routes");
+const routes = require("./routes/privates");
 const public = require("./routes/public");
 const session = require('express-session');
+require('dotenv').config();
+
+
+const verificarSesion = require('./middlewares/verificarSesion');
 
 
 // Configura express-session
 app.use(session({
-    secret: 'mi_secreto', // Cambia esto por tu secreto
+    secret: process.env.SESSIONTOKEN , // Cambia esto por tu secreto
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 3600000 } // Duración de la cookie en milisegundos (1 hora en este caso)
@@ -21,11 +25,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-
-const users = [
-    { id: 1, username: 'usuario1', password: 'password1' },
-    { id: 2, username: 'usuario2', password: 'password2' },
-  ];
 
 
 
@@ -41,7 +40,7 @@ app.get('/dashboard', (req, res) => {
 
 
 app.use("/", public);
-app.use("/admin", routes);
+app.use("/admin",verificarSesion, routes);
 
 
 // Configura EJS como motor de plantillas

@@ -1,0 +1,38 @@
+<%- include('../public_partials/head.ejs') %>
+
+<body id="page">
+  <div class="" id="content">
+    <section data-section-id="3" data-share="" data-category="headers" data-component-id="44d0b9e2_01_awz" class="is-relative has-background-light is-clipped">
+      <%- include('../public_partials/navbar.ejs') %>
+
+
+      <div class="columns is-mobile mt-5">
+        <div class="column is-three-fifths is-offset-one-fifth">
+          <form class="box" action="/login" method="post">
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" type="email" name="username" placeholder="e.g. alex@example.com">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input class="input" type="password" name="password" placeholder="********">
+              </div>
+            </div>
+
+            <button class="button is-primary">Sign in</button>
+          </form>
+        </div>
+      </div>
+
+
+    </section>
+
+  </div>
+</body>
+
+
+</html>
