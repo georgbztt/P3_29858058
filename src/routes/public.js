@@ -2,10 +2,12 @@ const express = require('express');
 const producto = require('../model/producto');
 const productoController = require('../controller/producto');
 const router = express.Router();
+require('dotenv').config();
+
+console.log(process.env.ADMIN,process.env.PASSWORD)
 
 const users = [
-    { id: 1, username: 'admin@admin.com', password: 'password' },
-    { id: 2, username: 'usuario2', password: 'password2' },
+    { id: 1, username: process.env.ADMIN, password: process.env.PASSWORD },
 ];
 
 router.get('/', async (req, res) => {

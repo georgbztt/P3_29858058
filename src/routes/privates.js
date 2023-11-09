@@ -29,6 +29,9 @@ router.get('/productos/delete/:producto_id', (req, res) => {
 router.get('/categorias', (req, res) => {
     categoria.index(req,res);
 });
+router.get('/categorias/create', (req, res) => {
+    categoria.create(req,res);
+});
 router.get('/categorias/:categoria_id', (req, res) => {
     categoria.show(req,res);
 });

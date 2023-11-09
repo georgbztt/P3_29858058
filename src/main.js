@@ -28,16 +28,6 @@ app.use(bodyParser.json());
 
 
 
-// Ruta protegida
-app.get('/dashboard', (req, res) => {
-    if (req.session.user) {
-        res.send('¡Has accedido al panel de control!');
-    } else {
-        res.redirect('/login');
-    }
-});
-
-
 
 app.use("/", public);
 app.use("/admin",verificarSesion, routes);
