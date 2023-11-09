@@ -51,6 +51,17 @@ module.exports = {
             });
         })
     },
+    // last() {
+    //     return new Promise((suc, rej) => {
+    //         db.all(`SELECT * from categorias order by id DESC limit 1`, function (err, rows) {
+    //             if (err) {
+    //                 rej(err.message)
+    //             } else {
+    //                 suc(rows[0])
+    //             }
+    //         });
+    //     })
+    // },
     update(data, categoria_id) {
         const { nombre } = data;
         return new Promise((suc, rej) => {

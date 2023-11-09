@@ -21,17 +21,12 @@ module.exports = {
         res.render("categorias/create");
     },
     async store(req, res) {
-
         const errores = this.validarDatos(req.body);
         if (errores.length > 0) {
             res.send(errores);
             return false;
         }
-
-
         await categoria.create(req.body);
-        const _categoria = await categoria.last();
-        await imagen.createMany(req.body, _categoria.id);
         res.redirect('/admin/categorias');
     },
     async show(req, res) {

@@ -32,6 +32,9 @@ router.get('/categorias', (req, res) => {
 router.get('/categorias/create', (req, res) => {
     categoria.create(req,res);
 });
+router.post('/categorias', (req, res) => {
+    categoria.store(req,res);
+});
 router.get('/categorias/:categoria_id', (req, res) => {
     categoria.show(req,res);
 });
