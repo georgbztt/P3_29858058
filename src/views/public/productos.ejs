@@ -1,0 +1,70 @@
+<%- include('../public_partials/head.ejs') %>
+
+<body id="page">
+  <%- include('../public_partials/navbar.ejs') %>
+  <div class="" id="content">
+    <section data-section-id="2" data-share="" data-category="product-info" data-component-id="b9652106_01_awz" class="section is-clipped">
+
+      <div class="container is-relative">
+        <div class="columns ">
+            <div class="column is-one-quarter">
+              <div class="columns">
+                <%- include('../public_partials/filterProducts.ejs') %>
+              </div>
+            </div>
+            <div class="columns is-mobile is-vcenstered is-multiline">
+
+                <% productos.forEach(function(producto) { %>
+      
+                <div class="column is-6-mobile is-3-desktop is-4-tablet mb-12 mb-0-desktop">
+                  <div class="card">
+                    <div class="card-image" style="text-align: center;">
+                      <img src="<%= producto.imagen_destacada%>" style="max-width: 150px; height: auto; display: inline-block;" alt="<%= producto.imagen_destacada%>">
+                    </div>
+                    <header class="card-header">
+                      <p class="card-header-title">
+                        <%= producto.nombre%>
+                      </p>
+                    </header>
+                    <div class="card-content">
+                      <div class="content">
+                        <p class="has-text-weight-bold">
+                          <%= producto.marca%>
+                        </p>
+                        <p class="">
+                          <%= producto.nombre_categoria%>
+                        </p>
+                      </div>
+                    </div>
+                    <footer class="card-footer">
+                      <a href="/producto/<%=producto.id%>" class="card-footer-item">Ver</a>
+                      <a class="card-footer-item has-text-weight-bold">$ <%= producto?.precio.toFixed(2)%></a>
+                    </footer>
+                  </div>
+                </div>
+                <% }); %>
+      
+              </div>
+       
+
+
+
+          </div>
+
+      </div>
+    </section>
+
+
+
+  </div>
+
+  <script src="https://shuffle.dev/static/build/runtime.199ee6f7.js" defer=""></script>
+  <script src="https://shuffle.dev/static/build/js/anchors.91039015.js" defer=""></script>
+
+
+
+
+
+</body>
+
+</html>

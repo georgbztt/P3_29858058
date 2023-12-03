@@ -1,0 +1,72 @@
+<%- include('../public_partials/head.ejs') %>
+
+<body id="page">
+  <%- include('../public_partials/navbar.ejs') %>
+  <div class="" id="content">
+    <section data-section-id="2" data-share="" data-category="product-info" data-component-id="b9652106_01_awz" class="section is-clipped">
+
+      <div class="container is-relative">
+        <div class="columns ">
+          <div class="column is-one-quarter">
+            <div class="columns">
+              <%- include('../public_partials/filterProducts.ejs') %>
+            </div>
+
+          </div>
+          <div class="columns is-mobile is-vcenstered is-multiline">
+
+            <% productos.forEach(function(producto) { %>
+            <div class="column is-full mb-20" style="max-height: 20px;">
+              <article class="media">
+                <figure class="media-left">
+                  <p class="image is-64x64">
+                    <img src="<%= producto.imagen_destacada%>">
+                  </p>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <strong><%= producto.nombre%></strong>
+                      <small>
+                        <%= producto.marca%>
+                        <%= producto.nombre_categoria%>
+                      </small>
+                      <br>
+                      <a href="/producto/<%=producto.id%>" class="myPrimaryButton">Ver</a>
+                      <a class="has-text-weight-bold">$ <%= producto?.precio.toFixed(2)%></a>
+                    </p>
+                  </div>
+                </div>
+              </article>
+              <hr>
+            </div>
+            <% }); %>
+
+
+
+
+
+          </div>
+
+
+
+
+        </div>
+
+      </div>
+    </section>
+
+
+
+  </div>
+
+  <script src="https://shuffle.dev/static/build/runtime.199ee6f7.js" defer=""></script>
+  <script src="https://shuffle.dev/static/build/js/anchors.91039015.js" defer=""></script>
+
+
+
+
+
+</body>
+
+</html>

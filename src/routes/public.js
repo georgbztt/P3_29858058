@@ -1,10 +1,11 @@
 const express = require('express');
 const producto = require('../model/producto');
 const productoController = require('../controller/producto');
+const categoria = require('../model/categoria');
 const router = express.Router();
 require('dotenv').config();
 
-console.log(process.env.ADMIN,process.env.PASSWORD)
+console.log(process.env.ADMIN, process.env.PASSWORD)
 
 const users = [
     { id: 1, username: process.env.ADMIN, password: process.env.PASSWORD },
@@ -14,6 +15,22 @@ router.get('/', async (req, res) => {
     const productos = await producto.allWithImagen();
     console.log(productos)
     res.render("public/index", { productos });
+});
+
+router.get('/producto', async (req, res) => {
+    const productos = await producto.getFiltred(req);
+    const marcas = await producto.getMarcas();
+    const categorias = await categoria.all();
+    const view = 'producto';
+    res.render("public/productos", { productos, marcas, categorias, view });
+});
+
+router.get('/producto-lists', async (req, res) => {
+    const productos = await producto.getFiltred(req);
+    const marcas = await producto.getMarcas();
+    const categorias = await categoria.all();
+    const view = 'producto-lists';
+    res.render("public/producto-lists", { productos, marcas, categorias, view });
 });
 
 router.get('/producto/:producto_id', (req, res) => {

@@ -124,5 +124,82 @@ module.exports = {
                 }
             });
         })
+    },
+    getMarcas() {
+        return new Promise((suc, rej) => {
+            db.all(`SELECT marca, COUNT(*) as cantidad FROM productos GROUP BY marca;`, function (err, rows) {
+                if (err) {
+                    rej(err.message)
+                } else {
+                    suc(rows)
+                }
+            });
+        })
+    },
+    getFiltred(req) {
+        return new Promise((suc, rej) => {
+            // Supongamos que los parámetros de filtro son 'marca', 'categoria' y 'nombre' en el query string
+            const marcaFilter = req.query.marca;
+            const categoriaFilter = req.query.categoria;
+            const nombreFilter = req.query.nombre;
+            const descripcionFilter = req.query.descripcion;
+            const precioFilter = req.query.precio;
+            console.log(req.query)
+
+            // Construir la consulta con los filtros si existen
+            let query = `SELECT 
+            productos.id, 
+            productos.nombre, 
+            productos.descripcion, 
+            productos.precio, 
+            productos.marca, 
+            productos.categoria_id,
+            categorias.nombre AS nombre_categoria,
+            (SELECT imagenes.url FROM imagenes WHERE imagenes.producto_id = productos.id limit 1) AS imagen_destacada
+            FROM productos
+            LEFT JOIN categorias ON productos.categoria_id = categorias.id where 1`; // WHERE 1 es siempre verdadero, para poder agregar condiciones con AND
+
+            // Parámetros para la consulta preparada, si es necesario
+            const params = [];
+
+            if (!!marcaFilter && marcaFilter != '') {
+                query += ` AND marca = ?`;
+                console.log('MARCA ISSET')
+                params.push(marcaFilter);
+            }
+
+            if (!!categoriaFilter && categoriaFilter != '') {
+                query += ` AND productos.categoria_id = ?`;
+                console.log('categoria_id ISSET')
+                params.push(categoriaFilter);
+            }
+
+            if (!!precioFilter && precioFilter != '') {
+                query += ` AND productos.precio = ?`;
+                console.log('precio ISSET')
+                params.push(precioFilter);
+            }
+
+            if (!!nombreFilter && nombreFilter != '') {
+                query += ` AND productos.nombre LIKE ?`;
+                console.log('nombre ISSET')
+                params.push(`%${nombreFilter}%`); // Utilizamos % para buscar coincidencias parciales
+            }
+
+            if (!!descripcionFilter && descripcionFilter != '') {
+                query += ` AND productos.descripcion LIKE ?`;
+                console.log('descripcion ISSET')
+                params.push(`%${descripcionFilter}%`); // Utilizamos % para buscar coincidencias parciales
+            }
+
+            // Ejecutar la consulta
+            db.all(query, params, function (err, rows) {
+                if (err) {
+                    rej(err.message);
+                } else {
+                    suc(rows);
+                }
+            });
+        });
     }
 }
