@@ -23,6 +23,7 @@ db.serialize(function () {
         )`);
 });
 
+
 db.serialize(function () {
     db.run(`CREATE TABLE IF NOT EXISTS imagenes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,6 +32,16 @@ db.serialize(function () {
             destacado INTEGER,
             FOREIGN KEY(producto_id) REFERENCES producto(id)
     )`);
+});
+
+db.serialize(function () {
+    db.run(`CREATE TABLE IF NOT EXISTS usuarios (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        email TEXT,
+        password TEXT,
+        is_admin BOOLEAN
+        )`);
 });
 
 // Cierra la conexión a la base de datos al final
