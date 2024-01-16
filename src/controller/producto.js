@@ -94,7 +94,9 @@ module.exports = {
         const phone = process.env.PHONE;
         const _producto = await producto.oneWithImagen(producto_id);
         const _imagenes = await imagen.findAll(producto_id);
-        res.render("public/producto", { _producto,_imagenes,phone });
+        const usuario = req.session.user;
+        console.log(usuario)
+        res.render("public/producto", { _producto,_imagenes,phone,usuario });
         // res.render("");
     }
 }

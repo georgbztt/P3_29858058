@@ -37,7 +37,16 @@
               </div>
 
               <div class="mb-14 columns is-multiline">
-                <div class="column is-12-touch is-12-desktop is-7-widescreen"><a target="_blank" href="https://wa.me/<%=phone%>?text=Hola estoy interesado en <%=_producto.nombre%>" class="button is-primary is-fullwidth" data-config-id="primary-action">Cotizar</a></div>
+
+                <% if(name){ %>
+                  <div class="column is-12-touch is-12-desktop is-7-widescreen"><a target="_blank" href="/comprar/<%=_producto.id%>" class="button is-primary is-fullwidth" data-config-id="primary-action">Comprar</a></div>
+       
+                  <% } else{ %>  
+                    <div class="column is-12-touch is-12-desktop is-7-widescreen"><a target="_blank" href="/registro" class="button is-primary is-fullwidth" data-config-id="primary-action">Registrate para comprar</a></div>
+     
+               <% } %>
+
+
                 <div class="column is-12-touch is-6-desktop is-5-widescreen">
                   <a class="button px-6 mr-4">
                     <svg class="-mt-1" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" data-config-id="auto-svg-5-1">

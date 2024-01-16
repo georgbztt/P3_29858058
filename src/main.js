@@ -8,11 +8,12 @@ require('dotenv').config();
 
 
 const verificarSesion = require('./middlewares/verificarSesion');
+const appedUserLocals = require('./middlewares/appedUserLocals');
 
 
 // Configura express-session
 app.use(session({
-    secret: process.env.SESSIONTOKEN , // Cambia esto por tu secreto
+    secret: process.env.SESSIONTOKEN, // Cambia esto por tu secreto
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 3600000 } // Duración de la cookie en milisegundos (1 hora en este caso)
@@ -29,8 +30,8 @@ app.use(bodyParser.json());
 
 
 
-app.use("/", public);
-app.use("/admin",verificarSesion, routes);
+app.use("/", appedUserLocals, public);
+app.use("/admin", verificarSesion, routes);
 
 
 // Configura EJS como motor de plantillas

@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
             if (usuario.is_admin) {
                 res.redirect('/admin');
             } else {
-                res.redirect('/cliente');
+                res.redirect('/');
             }
         } else {
             res.send('Credenciales incorrectas. Inténtalo de nuevo.');
