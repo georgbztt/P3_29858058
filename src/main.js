@@ -26,10 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-
-
-
-
 app.use("/", appedUserLocals, public);
 app.use("/admin", verificarSesion, routes);
 

@@ -30,4 +30,30 @@ module.exports = {
 
         })
     },
+    getAllShopping(user_id){
+        
+        return new Promise((suc, rej) => {
+            db.all(`
+            SELECT compras.id AS compra_id,
+            compras.cantidad,
+            compras.total_pagado,
+            usuarios.name AS nombre_cliente,
+            productos.nombre AS nombre_producto,
+            compras.ip_cliente,
+            compras.fecha
+            FROM compras
+            LEFT JOIN usuarios ON compras.cliente_id = usuarios.id
+            LEFT JOIN productos ON compras.producto_id = productos.id
+            where compras.cliente_id  ='${user_id}'
+            `, function (err, rows) {
+                if (err) {
+                    console.log(err)
+                    rej(err.message)
+                } else {
+                    suc(rows)
+                }
+            });
+
+        })
+    }
 }

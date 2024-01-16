@@ -1,8 +1,13 @@
+const fetch = require("node-fetch");
 const express = require('express');
 const producto = require('../model/producto');
 const productoController = require('../controller/producto');
 const categoria = require('../model/categoria');
 const user = require('../model/user');
+const compraController = require('../controller/compra');
+const compra = require('../model/compra');
+const cliente = require("../controller/cliente");
+const verificarSesion = require("../middlewares/verificarSesion");
 const router = express.Router();
 require('dotenv').config();
 
@@ -38,6 +43,10 @@ router.get('/producto/:producto_id', (req, res) => {
     productoController.preview(req, res)
 });
 
+// router.get('/comprar/:producto_id', (req, res) => {
+//     productoController.preview(req, res)
+// });
+
 
 // Ruta de inicio de sesión
 router.get('/login', (req, res) => {
@@ -65,17 +74,6 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         res.send('Credenciales incorrectas. Inténtalo de nuevo.');
     }
-
-
-
-    // const { username, password } = req.body;
-    // const user = users.find(u => u.username === username && u.password === password);
-    // if (user) {
-    //     req.session.user = user; // Almacena el usuario en la sesión
-    //     res.redirect('/admin');
-    // } else {
-    //     res.send('Credenciales incorrectas. Inténtalo de nuevo.');
-    // }
 });
 
 // Ruta para cerrar la sesión
@@ -100,6 +98,75 @@ router.post('/registro', async (req, res) => {
     } catch (error) {
         res.send('Error al guardar el usuario');
     }
+});
+
+
+
+router.get('/checkout/', verificarSesion, (req, res) => {
+    compraController.checkout(req, res);
+});
+
+router.post('/procesar-pago', async (req, res) => {
+
+    try {
+
+        const url = 'https://fakepayment.onrender.com/payments';
+        const data = {
+            "card-number": req.body['card-number'],
+            cvv: req.body['cvv'],
+            "expiration-month": req.body['expiration-month'],
+            "expiration-year": req.body['expiration-year'],
+            "full-name": req.body['full-name'],
+            "currency": "USD",
+            "description": req.body['producto-name'],
+            "amount": req.body['amount'],
+            "reference": "paymen_id:10002"
+        };
+
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJkYXRlIjoiMjAyNC0wMS0xNlQyMTo1NjozNS4zMDZaIiwiaWF0IjoxNzA1NDQyMTk1fQ.kBNmUGp6l2eWOHP5kjjk7X4jW-w3iiJ_BDDqHfplnSM';
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                res.send('Error al procesar documento');
+                throw new Error(`Error de red - ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            console.log('Respuesta exitosa:', responseData);
+
+            const dataInsert = {
+                cantidad: req.body['cantidad'],
+                total_pagado: responseData.data.amount,
+                cliente_id: req.session.user.id,
+                producto_id: req.body['producto_id'],
+                fecha: responseData.data.date
+            }
+            await compra.create(dataInsert);
+            res.redirect('/cliente')
+
+        } catch (error) {
+            console.error('Error en la solicitud:', error);
+        }
+
+
+    } catch (error) {
+        console.log(error);
+        res.send('Error al procesar pago');
+    }
+
+});
+
+router.get('/cliente', verificarSesion, (req, res) => {
+    cliente.index(req, res);
 });
 
 
