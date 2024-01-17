@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
-      <img class="image" src="/files/logo.png" width="112" height="28">
+      <img class="image" src="/files/logo.png" width="112" height="28" />
       <!-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> -->
     </a>
 
@@ -14,17 +14,37 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="/">
-        Inicio
-      </a>
-      <a class="navbar-item" href="/producto">
-        Productos
-      </a>
-
-
+      <a class="navbar-item" href="/"> Inicio </a>
+      <a class="navbar-item" href="/producto"> Productos </a>
     </div>
 
     <div class="navbar-end">
+      <% if(name){ %>
+      <% if(is_admin){ %>
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="myButton is-primary" href="/admin">
+            <strong>Admin Panel</strong>
+          </a>
+        </div>
+      </div>
+
+      <% } %>
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="myButton is-primary" href="/cliente/">
+            <strong><%=name%></strong>
+          </a>
+        </div>
+      </div>
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="myButton is-primary" href="/logout">
+            <strong>Logout</strong>
+          </a>
+        </div>
+      </div>
+      <% } else{ %>
       <div class="navbar-item">
         <div class="buttons">
           <a class="myButton is-primary" href="/login">
@@ -32,6 +52,14 @@
           </a>
         </div>
       </div>
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="myButton is-primary" href="/registro">
+            <strong>Registro</strong>
+          </a>
+        </div>
+      </div>
+      <% } %>
     </div>
   </div>
 </nav>

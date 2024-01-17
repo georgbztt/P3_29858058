@@ -5,11 +5,18 @@
     <section data-section-id="3" data-share="" data-category="headers" data-component-id="44d0b9e2_01_awz" class="is-relative has-background-light is-clipped">
       <%- include('../public_partials/navbar.ejs') %>
 
-
+      
       <div class="columns is-mobile mt-5">
-        <div class="column is-three-fifths is-offset-one-fifth">
-          <div class="title">Login</div>
-          <form class="box" action="/login" method="post">
+          <div class="column is-three-fifths is-offset-one-fifth">
+              <div class="title">Registro</div>
+              <form class="box" action="/registro" method="post">
+            <div class="field">
+              <label class="label">Nombre y Apellido</label>
+              <div class="control">
+                <input class="input" type="text" name="name" placeholder="">
+              </div>
+            </div>
+
             <div class="field">
               <label class="label">Email</label>
               <div class="control">
@@ -24,7 +31,7 @@
               </div>
             </div>
 
-            <button class="button is-primary">Sign in</button>
+            <button class="button is-primary">Registrar</button>
           </form>
         </div>
       </div>
